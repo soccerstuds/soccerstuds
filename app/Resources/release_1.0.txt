@@ -1,0 +1,767 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Oct 01, 2014 at 07:23 AM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.2.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `soccerstud`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Admin id',
+  `name` varchar(20) NOT NULL COMMENT 'Admin name',
+  `dob` date NOT NULL COMMENT 'birth date of admin',
+  `mobile_no` varchar(20) NOT NULL COMMENT 'mobile number of admin',
+  `email` varchar(50) NOT NULL COMMENT 'email  of admin',
+  `image_id` int(10) DEFAULT NULL COMMENT 'image id of admin',
+  `club_id` int(10) NOT NULL COMMENT 'club id where admin belongs to',
+  `created_on` datetime NOT NULL COMMENT 'admin created on',
+  `created_by` int(10) NOT NULL COMMENT 'admin created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'admin updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'admin updated by',
+  PRIMARY KEY (`id`),
+  KEY `image_id` (`image_id`,`club_id`),
+  KEY `club_id` (`club_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='admin''s details of club' AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `dob`, `mobile_no`, `email`, `image_id`, `club_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'bhumika', '1990-03-19', '9998675432', 'bhumika@yahoo.com', NULL, 2, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `advertisement`
+--
+
+CREATE TABLE IF NOT EXISTS `advertisement` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of advertisement',
+  `title` varchar(100) NOT NULL COMMENT 'title of advertisement',
+  `imageid` int(10) DEFAULT NULL COMMENT 'image of advertisement',
+  `videoid` int(10) DEFAULT NULL COMMENT 'video id  of  advertisement',
+  `teamid` int(10) DEFAULT NULL COMMENT 'team id of advertisement',
+  `created_on` datetime NOT NULL COMMENT 'advertisement created on',
+  `created_by` int(10) NOT NULL COMMENT 'advertisement created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'advertisement updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'advertisement updated by',
+  PRIMARY KEY (`id`),
+  KEY `imageid` (`imageid`,`videoid`,`teamid`),
+  KEY `videoid` (`videoid`),
+  KEY `teamid` (`teamid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='it contains details of  advertisements' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `albums`
+--
+
+CREATE TABLE IF NOT EXISTS `albums` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of the album',
+  `title` varchar(100) NOT NULL COMMENT 'title of the album',
+  `description` varchar(1000) NOT NULL COMMENT 'description of the album',
+  `type` varchar(20) NOT NULL COMMENT '1: image 2:video',
+  `created_on` datetime NOT NULL COMMENT 'album created on',
+  `created_by` int(10) NOT NULL COMMENT 'album created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'album updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'album updated by',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='it contains video and image album details' AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `albums`
+--
+
+INSERT INTO `albums` (`id`, `title`, `description`, `type`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, '2013', 'football pics of 2013', 'image', '2014-09-25 00:00:00', 1, NULL, NULL),
+(2, '2013', 'video of 2013', 'video', '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of category',
+  `name` varchar(20) NOT NULL COMMENT 'name of category',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'club'),
+(2, 'news'),
+(3, 'admin'),
+(4, 'team'),
+(5, 'commitee_member'),
+(6, 'history'),
+(7, 'players'),
+(8, 'album'),
+(9, 'advertisement'),
+(10, 'sponsers');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clubs`
+--
+
+CREATE TABLE IF NOT EXISTS `clubs` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Club id',
+  `name` varchar(20) NOT NULL COMMENT 'Club Name',
+  `url` varchar(100) NOT NULL COMMENT 'Club url',
+  `image_id` int(10) DEFAULT NULL COMMENT 'Club Image id',
+  `created_on` datetime NOT NULL COMMENT 'Club created on',
+  `created_by` int(10) NOT NULL COMMENT 'Club created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'Club updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'Club updated by',
+  PRIMARY KEY (`id`),
+  KEY `image_id` (`image_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='It contains details of all Clubs' AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `clubs`
+--
+
+INSERT INTO `clubs` (`id`, `name`, `url`, `image_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(2, 'navrachna', 'localhost/soccerstud/nav', 1, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `commitee_members`
+--
+
+CREATE TABLE IF NOT EXISTS `commitee_members` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'commitee member id',
+  `name` varchar(20) NOT NULL COMMENT 'name of commitee member',
+  `designation` varchar(20) NOT NULL COMMENT 'designation of commitee member',
+  `dob` date NOT NULL COMMENT 'birthdate of commitee member',
+  `mobile_no` varchar(15) NOT NULL COMMENT 'mobile number of commitee member',
+  `email` varchar(50) NOT NULL COMMENT 'email of commitee member',
+  `image_id` int(10) DEFAULT NULL COMMENT 'image id of commitee member',
+  `club_id` int(10) NOT NULL COMMENT 'club id of commitee member',
+  `created_on` datetime NOT NULL COMMENT ' commitee member created on',
+  `created_by` int(10) NOT NULL COMMENT ' commitee member created by',
+  `updated_on` datetime DEFAULT NULL COMMENT ' commitee member updatedon',
+  `updated_by` int(10) DEFAULT NULL COMMENT ' commitee member updated by',
+  PRIMARY KEY (`id`),
+  KEY `image_id` (`image_id`),
+  KEY `club_id` (`club_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contains all the details of commitee members' AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `commitee_members`
+--
+
+INSERT INTO `commitee_members` (`id`, `name`, `designation`, `dob`, `mobile_no`, `email`, `image_id`, `club_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'Deepk Salunke', 'manager/coach', '1985-09-08', '9879577081', 'deepak@gmail.com', NULL, 2, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fixtures`
+--
+
+CREATE TABLE IF NOT EXISTS `fixtures` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'fixture id',
+  `homeid` int(10) NOT NULL COMMENT 'home team id',
+  `away_registered_id` int(10) DEFAULT NULL COMMENT 'away team registered id',
+  `away_nonregistered_id` int(10) DEFAULT NULL COMMENT 'away team non registered id',
+  `venue` varchar(20) NOT NULL COMMENT 'venue of the match',
+  `date` date NOT NULL COMMENT 'date of the match',
+  `time` time NOT NULL COMMENT 'time of the match',
+  `type` int(10) NOT NULL COMMENT 'reference from team_category table',
+  `home_score` int(10) DEFAULT NULL COMMENT 'score of the home team',
+  `away_score` int(10) DEFAULT NULL COMMENT 'score of the away team',
+  `status` varchar(20) NOT NULL COMMENT '1:pre 2:post',
+  `report` varchar(1000) DEFAULT NULL COMMENT 'report of the post match',
+  `created_on` datetime NOT NULL COMMENT 'fixture created on',
+  `created_by` int(10) NOT NULL COMMENT 'fixture created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'fixture updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'fixture updated by',
+  PRIMARY KEY (`id`),
+  KEY `homeid` (`homeid`),
+  KEY `away_registered_id` (`away_registered_id`),
+  KEY `away_nonregistered_id` (`away_nonregistered_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contais fixture details' AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `fixtures`
+--
+
+INSERT INTO `fixtures` (`id`, `homeid`, `away_registered_id`, `away_nonregistered_id`, `venue`, `date`, `time`, `type`, `home_score`, `away_score`, `status`, `report`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 1, 2, NULL, 'baroda', '2014-09-27', '04:15:00', 1, NULL, NULL, 'pre', NULL, '2014-09-25 00:00:00', 1, NULL, NULL),
+(2, 1, 2, NULL, 'baroda', '2014-09-23', '07:05:00', 2, 4, 6, 'post', NULL, '2014-09-24 00:00:00', 1, NULL, NULL),
+(3, 1, 2, NULL, 'baroda', '2014-09-16', '00:00:20', 1, 2, 2, 'post', NULL, '2014-09-24 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history`
+--
+
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL COMMENT '1:school 2:club 3:team',
+  `description` varchar(1000) NOT NULL COMMENT 'history description',
+  `image_id` int(10) DEFAULT NULL COMMENT 'history image id',
+  `team_id` int(10) NOT NULL COMMENT 'history team id',
+  `created_on` datetime NOT NULL COMMENT 'history created on',
+  `created_by` int(10) NOT NULL COMMENT 'history created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'history updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'history updated by',
+  PRIMARY KEY (`id`),
+  KEY `image_id` (`image_id`),
+  KEY `team_id` (`team_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `history`
+--
+
+INSERT INTO `history` (`id`, `type`, `description`, `image_id`, `team_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'club', 'The diamond-cutting precision of Germans, Messiâ€™s hypnotic mastery, and Robbenâ€™s ravaging runs: till recently, football lovers in Ahmedabad and the rest of India were kept awake at nights by the Beautiful Game as nations battled for the World Cup. From August 31, the same obsession will enliven evenings in Ahmedabad as TOI-Claris Twenty20 School Soccer returns!\r\nThe third edition of TOIâ€™s tournament â€” to be played on the Karnavati Club lawns â€” comes with the explosive momentum of success. Since the tournament was inaugurated in 2012, every match has intensified the quality of the spectacle: from the skill of players to the passion of the ever swelling crowds.\r\nThe event has scored several goals of â€˜firstsâ€™ â€” it was the first ever T20 soccer championship to be held in the state. And, in 2013, it became the first T20 soccer tournament to include a girlsâ€™ section.', NULL, 1, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of image',
+  `url` varchar(100) NOT NULL COMMENT 'image url',
+  `category_id` int(10) NOT NULL COMMENT 'category of image',
+  `rel_id` int(10) NOT NULL COMMENT 'relation id',
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='it contains all the url of images with their category' AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `url`, `category_id`, `rel_id`) VALUES
+(1, 'img/club/navrachna.jpeg', 1, 2),
+(2, 'img/navrachna/img1.jpeg', 8, 1),
+(3, 'img/navrachna/img2.jpeg', 8, 1),
+(4, 'img/navrachna/img3.jpeg', 8, 1),
+(5, 'img/navrachna/img1.jpeg', 8, 1),
+(6, 'img/navrachna/img4.jpeg', 8, 1),
+(7, 'img/navrachna/img5.jpeg', 8, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of the news',
+  `title` varchar(100) NOT NULL COMMENT 'news title',
+  `description` varchar(1000) NOT NULL COMMENT 'news description',
+  `team_id` int(10) NOT NULL COMMENT 'team id of the news',
+  `image_id` int(10) DEFAULT NULL COMMENT 'image id of the news',
+  `created_on` datetime NOT NULL COMMENT 'news created on',
+  `created_by` int(10) NOT NULL COMMENT 'news created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'news updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'news updated by',
+  PRIMARY KEY (`id`),
+  KEY `team_id` (`team_id`),
+  KEY `image_id` (`image_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contains all the details of the news' AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `description`, `team_id`, `image_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'Navrachna School', 'Navrachana School is a part of the Navrachana Education Society[1] started by Smt. Savita Amin in 1967 and now under the management of Smt. Tejal Amin. It has a strength of 3000 students and 150 teachers. The school is in the Sama locality of Baroda city. The principal is Mrs. Bijoya Baksi.', 1, NULL, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `non_member_players`
+--
+
+CREATE TABLE IF NOT EXISTS `non_member_players` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of non member player',
+  `name` varchar(20) NOT NULL COMMENT 'name of the players',
+  `non_member_teamid` int(10) NOT NULL COMMENT 'team name of the player',
+  `created_on` datetime NOT NULL COMMENT 'players created on',
+  `created_by` int(10) NOT NULL COMMENT 'players created by',
+  PRIMARY KEY (`id`),
+  KEY `non_member_teamid` (`non_member_teamid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='it contains details of non member team''s players' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `non_member_teams`
+--
+
+CREATE TABLE IF NOT EXISTS `non_member_teams` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of non member team',
+  `name` varchar(20) NOT NULL COMMENT 'team name',
+  `created_on` datetime NOT NULL COMMENT 'team created on',
+  `created_by` int(10) NOT NULL COMMENT 'team created by',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='it contais details of non member teams' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parents`
+--
+
+CREATE TABLE IF NOT EXISTS `parents` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'parents id',
+  `father_name` varchar(20) NOT NULL COMMENT 'father name',
+  `mother_name` varchar(20) NOT NULL COMMENT 'mother name',
+  `father_mobile_no` varchar(15) DEFAULT NULL COMMENT 'father''s mobile number',
+  `mother_mobile_no` varchar(15) DEFAULT NULL COMMENT 'mother''s mobile no',
+  `father_email` varchar(50) DEFAULT NULL COMMENT 'father''s email address',
+  `mother_email` varchar(50) DEFAULT NULL COMMENT 'mother''s email address',
+  `father_occupation` varchar(20) DEFAULT NULL COMMENT 'father''s occupation',
+  `mother_occupation` varchar(20) DEFAULT NULL COMMENT 'mother''s occupation',
+  `playerid` int(10) NOT NULL COMMENT 'player''s ',
+  `created_on` datetime NOT NULL COMMENT 'created on',
+  `created_by` int(10) NOT NULL COMMENT 'created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'updated by',
+  PRIMARY KEY (`id`),
+  KEY `playerid` (`playerid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contais all the details of the player''s parents' AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `parents`
+--
+
+INSERT INTO `parents` (`id`, `father_name`, `mother_name`, `father_mobile_no`, `mother_mobile_no`, `father_email`, `mother_email`, `father_occupation`, `mother_occupation`, `playerid`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'Jayeshbhai Shah', 'Chetnaben Shah', '8887654333', '7676767676', 'jayesh@gmail.com', 'chetna@yahoo.com', 'business', 'house-wife', 1, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penallty_shootout`
+--
+
+CREATE TABLE IF NOT EXISTS `penallty_shootout` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of panelty shoot',
+  `home_id` int(10) NOT NULL COMMENT 'id of home team',
+  `away_member_id` int(10) DEFAULT NULL COMMENT 'id of away member team',
+  `away_nonmember_id` int(10) DEFAULT NULL COMMENT 'id of away non member team',
+  `player_id` int(10) NOT NULL COMMENT 'id of player',
+  `try` int(10) NOT NULL COMMENT 'total number of trial by user',
+  `goal` int(10) NOT NULL COMMENT 'total number of goal by player',
+  `created_on` datetime NOT NULL COMMENT 'panelty shootout created on',
+  `created_by` int(10) NOT NULL COMMENT 'panelty shootout created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'panelty shootout updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'panelty shootout updated by',
+  `fixture_id` int(10) NOT NULL COMMENT 'fixture id',
+  PRIMARY KEY (`id`),
+  KEY `home_id` (`home_id`),
+  KEY `away_registered_id` (`away_member_id`),
+  KEY `away_nonregistered_id` (`away_nonmember_id`),
+  KEY `player_id` (`player_id`),
+  KEY `fixture_id` (`fixture_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contains details of penalty shootout of the  fixtures.' AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `penallty_shootout`
+--
+
+INSERT INTO `penallty_shootout` (`id`, `home_id`, `away_member_id`, `away_nonmember_id`, `player_id`, `try`, `goal`, `created_on`, `created_by`, `updated_on`, `updated_by`, `fixture_id`) VALUES
+(1, 1, 2, NULL, 2, 1, 1, '2014-09-24 00:00:00', 1, NULL, NULL, 3),
+(2, 1, 2, NULL, 7, 1, 0, '2014-09-24 00:00:00', 1, NULL, NULL, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `players`
+--
+
+CREATE TABLE IF NOT EXISTS `players` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'player''s id',
+  `name` varchar(20) NOT NULL COMMENT 'player''s name',
+  `dob` date NOT NULL COMMENT 'player''s birthdate',
+  `email` varchar(50) NOT NULL COMMENT 'player''s email',
+  `mobile_no` varchar(15) NOT NULL COMMENT 'player''s mobile number',
+  `position` varchar(20) NOT NULL COMMENT 'player''s position in match',
+  `image_id` int(10) DEFAULT NULL COMMENT 'player''s image id',
+  `team_id` int(10) NOT NULL COMMENT 'player''s team id',
+  `created_on` datetime NOT NULL COMMENT 'player''s created on',
+  `created_by` int(10) NOT NULL COMMENT 'player''s created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'player''s updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'player''s updated by',
+  PRIMARY KEY (`id`),
+  KEY `image_id` (`image_id`),
+  KEY `team_id` (`team_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contains players details' AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `players`
+--
+
+INSERT INTO `players` (`id`, `name`, `dob`, `email`, `mobile_no`, `position`, `image_id`, `team_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'Param Kukadia', '1995-09-15', 'param@gmail.com', '666785432', 'GK', NULL, 1, '2014-09-25 00:00:00', 1, NULL, NULL),
+(2, 'Kavish Ganesh', '1998-09-24', 'kavish@gmail.com', '998765433', 'player', NULL, 1, '2014-09-25 00:00:00', 1, NULL, NULL),
+(3, 'Abhishek Patel', '1998-12-09', 'abhi@gmail.com', '9987654422', 'player', NULL, 1, '2014-09-25 00:00:00', 1, NULL, NULL),
+(4, 'Manan Varia', '1998-06-11', 'manan@yahoo.com', '8776543899', 'player', NULL, 1, '2014-09-25 00:00:00', 1, NULL, NULL),
+(5, 'Meet Devda', '1998-09-22', 'meet@gmail.com', '8765432111', 'player', NULL, 1, '2014-09-25 00:00:00', 1, NULL, NULL),
+(6, 'Isha Patel', '1999-09-17', 'isha@gmail.com', '2223456788', 'GK', NULL, 2, '2014-09-25 00:00:00', 1, NULL, NULL),
+(7, 'Upasana Mahajan', '1998-06-09', 'maha@yahoo.com', '9998765433', 'player', NULL, 2, '2014-09-25 00:00:00', 1, NULL, NULL),
+(9, 'Rutu Patel', '1999-09-17', 'patel@yahoo.com', '8887654433', 'player', NULL, 2, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `player_stat`
+--
+
+CREATE TABLE IF NOT EXISTS `player_stat` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'player statistics id',
+  `player_id` int(10) NOT NULL COMMENT 'player id',
+  `fixture_id` int(10) NOT NULL COMMENT 'fixture id',
+  `team_id` int(10) NOT NULL COMMENT 'team id ',
+  `app` int(10) NOT NULL,
+  `sub` int(10) NOT NULL,
+  `yel` int(10) NOT NULL,
+  `red` int(10) NOT NULL,
+  `ass` int(10) NOT NULL,
+  `gls` int(10) NOT NULL,
+  `star` int(10) NOT NULL,
+  `created_on` datetime NOT NULL COMMENT 'player stat created on',
+  `created_by` int(10) NOT NULL COMMENT 'player stat created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'player stat updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'player stat updated by ',
+  PRIMARY KEY (`id`),
+  KEY `player_id` (`player_id`),
+  KEY `fixture_id` (`fixture_id`),
+  KEY `team_id` (`team_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='statistics of the players' AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `player_stat`
+--
+
+INSERT INTO `player_stat` (`id`, `player_id`, `fixture_id`, `team_id`, `app`, `sub`, `yel`, `red`, `ass`, `gls`, `star`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 1, 2, 1, 0, 0, 0, 0, 0, 2, 0, '2014-09-24 00:00:00', 1, NULL, NULL),
+(2, 2, 2, 1, 0, 0, 1, 0, 0, 2, 1, '2014-09-24 00:00:00', 1, NULL, NULL),
+(3, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, '2014-09-24 00:00:00', 1, NULL, NULL),
+(4, 6, 2, 2, 0, 0, 0, 0, 0, 3, 0, '0000-00-00 00:00:00', 1, NULL, NULL),
+(5, 7, 2, 2, 0, 0, 0, 0, 0, 3, 0, '2014-09-24 00:00:00', 1, NULL, NULL),
+(6, 9, 2, 2, 0, 0, 0, 0, 0, 0, 0, '2014-09-24 00:00:00', 1, NULL, NULL),
+(7, 2, 3, 1, 0, 0, 0, 0, 0, 2, 0, '2014-09-24 00:00:00', 1, NULL, NULL),
+(8, 7, 3, 2, 0, 0, 0, 0, 0, 2, 1, '2014-09-24 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `point_table`
+--
+
+CREATE TABLE IF NOT EXISTS `point_table` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of point table',
+  `team_id` int(10) NOT NULL COMMENT 'team id',
+  `fixture_id` int(10) NOT NULL COMMENT 'fixture id',
+  `p` int(10) NOT NULL,
+  `w` int(10) NOT NULL,
+  `d` int(10) NOT NULL,
+  `l` int(10) NOT NULL,
+  `f` int(10) NOT NULL,
+  `a` int(10) NOT NULL,
+  `gd` int(10) NOT NULL,
+  `pts` int(10) NOT NULL,
+  `created_on` datetime NOT NULL COMMENT 'point table created on',
+  `created_by` int(10) NOT NULL COMMENT 'point table created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'point table updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'point table updated by',
+  PRIMARY KEY (`id`),
+  KEY `team_id` (`team_id`),
+  KEY `fixture_id` (`fixture_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='contais details of point table' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sponsers`
+--
+
+CREATE TABLE IF NOT EXISTS `sponsers` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of sponcers',
+  `title` varchar(100) NOT NULL COMMENT 'title of sponcers',
+  `image_id` int(10) DEFAULT NULL COMMENT 'image id of sponcers',
+  `video_id` int(10) DEFAULT NULL COMMENT 'video id of sponcers',
+  `team_id` int(10) DEFAULT NULL COMMENT 'team id of sponcers',
+  `created_on` datetime NOT NULL COMMENT 'sponcers created on',
+  `created_by` int(10) NOT NULL COMMENT 'sponcers created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'sponcers updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'sponcers updated by',
+  PRIMARY KEY (`id`),
+  KEY `image_id` (`image_id`),
+  KEY `video_id` (`video_id`),
+  KEY `team_id` (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='it contains details of sponsers' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teams`
+--
+
+CREATE TABLE IF NOT EXISTS `teams` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'team id',
+  `name` varchar(20) NOT NULL COMMENT 'name of team',
+  `club_id` int(10) NOT NULL COMMENT 'refers to club id',
+  `image_id` int(10) DEFAULT NULL COMMENT 'refers to image of team',
+  `created_on` datetime NOT NULL COMMENT 'team created on ',
+  `created_by` int(10) NOT NULL COMMENT 'team created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'team updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'team updated by',
+  PRIMARY KEY (`id`),
+  KEY `club_id` (`club_id`),
+  KEY `image_id` (`image_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='team details of clubs' AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `teams`
+--
+
+INSERT INTO `teams` (`id`, `name`, `club_id`, `image_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'boys', 2, NULL, '2014-09-25 00:00:00', 1, NULL, NULL),
+(2, 'girls', 2, NULL, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `team_category`
+--
+
+CREATE TABLE IF NOT EXISTS `team_category` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'unique id to differentiate team category type',
+  `name` varchar(255) NOT NULL COMMENT 'category name',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Shows category to which team belongs i.e Internally,inter school,state level,etc' AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `team_category`
+--
+
+INSERT INTO `team_category` (`id`, `name`) VALUES
+(1, 'internal'),
+(2, 'inter school'),
+(3, 'state level'),
+(4, 'national level');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'user id',
+  `username` varchar(20) NOT NULL COMMENT 'name of the user',
+  `password` varchar(20) NOT NULL COMMENT 'password of the uer',
+  `cateory_id` int(10) NOT NULL COMMENT 'category id',
+  `created_on` datetime NOT NULL COMMENT 'users created on',
+  `created_by` int(10) NOT NULL COMMENT 'users created by',
+  `updated_on` datetime DEFAULT NULL COMMENT 'users updated on',
+  `updated_by` int(10) DEFAULT NULL COMMENT 'users updated by',
+  PRIMARY KEY (`id`),
+  KEY `cateory_id` (`cateory_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contains password and username of users' AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `cateory_id`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(1, 'bhumika', 'bhumika', 3, '2014-09-25 00:00:00', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `videos`
+--
+
+CREATE TABLE IF NOT EXISTS `videos` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id of videos',
+  `url` varchar(100) NOT NULL COMMENT 'video url',
+  `category_id` int(10) NOT NULL COMMENT 'category of video',
+  `rel_id` int(10) NOT NULL COMMENT 'relation id of video',
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='it contais url of videos with their category id' AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `videos`
+--
+
+INSERT INTO `videos` (`id`, `url`, `category_id`, `rel_id`) VALUES
+(1, 'img/navrachna_video/chocos.mp4', 8, 2);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`),
+  ADD CONSTRAINT `admin_ibfk_2` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`);
+
+--
+-- Constraints for table `advertisement`
+--
+ALTER TABLE `advertisement`
+  ADD CONSTRAINT `advertisement_ibfk_1` FOREIGN KEY (`imageid`) REFERENCES `images` (`id`),
+  ADD CONSTRAINT `advertisement_ibfk_2` FOREIGN KEY (`videoid`) REFERENCES `videos` (`id`),
+  ADD CONSTRAINT `advertisement_ibfk_3` FOREIGN KEY (`teamid`) REFERENCES `teams` (`id`);
+
+--
+-- Constraints for table `clubs`
+--
+ALTER TABLE `clubs`
+  ADD CONSTRAINT `clubs_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`);
+
+--
+-- Constraints for table `commitee_members`
+--
+ALTER TABLE `commitee_members`
+  ADD CONSTRAINT `commitee_members_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`),
+  ADD CONSTRAINT `commitee_members_ibfk_2` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`);
+
+--
+-- Constraints for table `fixtures`
+--
+ALTER TABLE `fixtures`
+  ADD CONSTRAINT `fixtures_ibfk_1` FOREIGN KEY (`homeid`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `fixtures_ibfk_2` FOREIGN KEY (`away_registered_id`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `fixtures_ibfk_3` FOREIGN KEY (`away_nonregistered_id`) REFERENCES `non_member_teams` (`id`);
+
+--
+-- Constraints for table `history`
+--
+ALTER TABLE `history`
+  ADD CONSTRAINT `history_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`),
+  ADD CONSTRAINT `history_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`);
+
+--
+-- Constraints for table `images`
+--
+ALTER TABLE `images`
+  ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+--
+-- Constraints for table `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `news_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`);
+
+--
+-- Constraints for table `non_member_players`
+--
+ALTER TABLE `non_member_players`
+  ADD CONSTRAINT `non_member_players_ibfk_1` FOREIGN KEY (`non_member_teamid`) REFERENCES `non_member_teams` (`id`);
+
+--
+-- Constraints for table `parents`
+--
+ALTER TABLE `parents`
+  ADD CONSTRAINT `parents_ibfk_1` FOREIGN KEY (`playerid`) REFERENCES `players` (`id`);
+
+--
+-- Constraints for table `penallty_shootout`
+--
+ALTER TABLE `penallty_shootout`
+  ADD CONSTRAINT `penallty_shootout_ibfk_1` FOREIGN KEY (`home_id`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `penallty_shootout_ibfk_2` FOREIGN KEY (`away_member_id`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `penallty_shootout_ibfk_3` FOREIGN KEY (`away_nonmember_id`) REFERENCES `non_member_teams` (`id`),
+  ADD CONSTRAINT `penallty_shootout_ibfk_4` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`),
+  ADD CONSTRAINT `penallty_shootout_ibfk_5` FOREIGN KEY (`fixture_id`) REFERENCES `fixtures` (`id`);
+
+--
+-- Constraints for table `players`
+--
+ALTER TABLE `players`
+  ADD CONSTRAINT `players_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`),
+  ADD CONSTRAINT `players_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`);
+
+--
+-- Constraints for table `player_stat`
+--
+ALTER TABLE `player_stat`
+  ADD CONSTRAINT `player_stat_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`),
+  ADD CONSTRAINT `player_stat_ibfk_2` FOREIGN KEY (`fixture_id`) REFERENCES `fixtures` (`id`),
+  ADD CONSTRAINT `player_stat_ibfk_3` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`);
+
+--
+-- Constraints for table `point_table`
+--
+ALTER TABLE `point_table`
+  ADD CONSTRAINT `point_table_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `point_table_ibfk_2` FOREIGN KEY (`fixture_id`) REFERENCES `fixtures` (`id`);
+
+--
+-- Constraints for table `sponsers`
+--
+ALTER TABLE `sponsers`
+  ADD CONSTRAINT `sponsers_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`),
+  ADD CONSTRAINT `sponsers_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `videos` (`id`),
+  ADD CONSTRAINT `sponsers_ibfk_3` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`);
+
+--
+-- Constraints for table `teams`
+--
+ALTER TABLE `teams`
+  ADD CONSTRAINT `teams_ibfk_1` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`),
+  ADD CONSTRAINT `teams_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`cateory_id`) REFERENCES `category` (`id`);
+
+--
+-- Constraints for table `videos`
+--
+ALTER TABLE `videos`
+  ADD CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
