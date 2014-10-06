@@ -1,0 +1,7 @@
+//alter table of committe_member
+
+ALTER TABLE `commitee_members` ADD `bipgraphy` VARCHAR(1000) NOT NULL ;
+
+//alter history table...
+ALTER TABLE `history` ADD `club_id` INT(10) NOT NULL COMMENT 'it display id of club' , ADD INDEX (`club_id`) ;
+ALTER TABLE `history` ADD FOREIGN KEY (`club_id`) REFERENCES `soccerstud`.`clubs`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
