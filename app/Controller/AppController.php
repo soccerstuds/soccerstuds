@@ -40,6 +40,9 @@ class AppController extends Controller {
 	function beforeFilter(){
 		if($this->theme=='SoccerDesktop'){
             $this->_checkLogin();
+            $this->loadModel('Team');
+            $this->set('teams',$this->Team->getteam());
+
     	}
 	}
 

@@ -44,7 +44,7 @@ $js_files=array('jquery-1.10.2','jquery-ui','bootstrap.min');
 		</div> -->
 		<?php echo $this->element('header');  ?>
 		<div id="content">
-
+			<?php echo $this->element('team');  ?>
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
